@@ -1,6 +1,3 @@
-let humanScore =0;
-let computerScore=0;
-
 function getComputerChoice() {
     const comp=(Math.floor(Math.random()*10)+1);
     let compick=0;
@@ -47,22 +44,27 @@ function playRound(humanChoice, computerChoice){
         console.log("Computer wins!");
         computerScore++;
     }
-    return [humanScore,computerScore];
+    return humanScore,computerScore;
 
 }
 
 function playGame(){
-    let scores=[];
     for(let i=0; i<=5;i++){
     let humanChoice= getHumanChoice();
     let computerChoice= getComputerChoice();
-    scores=playRound(humanChoice, computerChoice);
+    playRound(humanChoice, computerChoice);
     }
-    if(scores[0]>scores[1]){
-        console.log(`Human wins with the score of ${scores[0]}`);
-    }else if(scores[0]<scores[1]) {
-        console.log(`Computer wins with the score of ${scores[1]}`);
+    if(humanScore>computerScore){
+        console.log(`Human wins with the score of ${humanScore}`);
+    }else if(humanScore<computerScore) {
+        console.log(`Computer wins with the score of ${computerScore}`);
         
-    }else console.log(`Its a tie!! With both score of ${scores[1]}!!`);
+    }else console.log(`Its a tie!! With both score of ${computerScore}!!`);
 }
+
+
+let humanScore =0;
+let computerScore=0;
+
+
 playGame();
