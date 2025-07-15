@@ -10,20 +10,24 @@ function getComputerChoice() {
     return compick;
 }
 
-function getHumanChoice() {
-    let user = prompt("Pick Rock Paper or Scissors")
+function getHumanChoice(e) {
+    let user = e.target.value.toLowerCase();
     let userpick = 0;
-    if (user === null) {
-        getHumanChoice();
-    } else if (user.toLowerCase() === "rock") {
-        userpick = 1;
-    } else if (user.toLowerCase() === "paper") {
-        userpick = 2;
-    } else if (user.toLowerCase() === "scissors") {
-        userpick = 3;
-    } else getHumanChoice();
 
-    return userpick
+
+    if (!["rock", "paper", "scissors"].includes(user.toLowerCase())) {
+        console.warn("Invalid input, ignoring.");
+    } else if (user === "rock") {
+        userpick = 1;
+    } else if (user=== "paper") {
+        userpick = 2;
+    } else {
+        userpick = 3;
+    }
+        
+
+    const computerPick = getComputerChoice();
+    playRound(userpick, computerPick);
 }
 
 
@@ -44,27 +48,39 @@ function playRound(humanChoice, computerChoice){
         console.log("Computer wins!");
         computerScore++;
     }
-    return humanScore,computerScore;
+
+    roundsPlayed++
+
+    if(roundsPlayed>5)endGame()
 
 }
 
-function playGame(){
-    for(let i=0; i<=5;i++){
-    let humanChoice= getHumanChoice();
-    let computerChoice= getComputerChoice();
-    playRound(humanChoice, computerChoice);
-    }
+function endGame(){
     if(humanScore>computerScore){
         console.log(`Human wins with the score of ${humanScore}`);
     }else if(humanScore<computerScore) {
         console.log(`Computer wins with the score of ${computerScore}`);
         
     }else console.log(`Its a tie!! With both score of ${computerScore}!!`);
+    
 }
 
+function restart(){
+    humanScore = 0;
+    computerScore = 0;
+    roundsPlayed = 0;
+
+}
+
+function globalEventListener(type,selector,callback){
+    document.addEventListener(type, e=>{
+        if(e.target.matches(selector)) callback(e)
+    })
+}
 
 let humanScore =0;
 let computerScore=0;
+let roundsPlayed = 0;
 
-
-playGame();
+globalEventListener("click",".game-buttons button",getHumanChoice);
+globalEventListener("click",".restart-panel button",restart);
