@@ -13,13 +13,13 @@
         <h2>Fight!</h2>
         <div class="battle-grounds">
             <div >
-                <div class="computer-side">
-                    Computer
-                </div>
-                <div class="player-side">
-                    Player
+                <div class="computer-side"><span id="comp-idle" class="active">Computer</span><span id="comp-rock">Rock</span>
+                    <span id="comp-paper" >Paper</span><span id="comp-scissors" >Scissors</span></div>
+                <div class="player-side"><span id="user-idle" class="active">User</span><span id="user-rock" >Rock</span>
+                    <span id="user-paper" >Paper</span><span id="user-scissors">Scissors</span>
                 </div>
             </div>
+            
         </div>
         <div class="container">
             <div class="game-buttons">
@@ -87,6 +87,25 @@
         gap: 20%;
     }
 
+    .computer-side span{
+      display: none;
+    }
+
+    .computer-side span.active {
+      display: inline;
+      
+    }
+
+    .player-side span{
+      display: none;
+    }
+
+    .player-side span.active {
+      display: inline;
+      
+    }
+
+    
 
 
 

@@ -1,3 +1,5 @@
+// const { createElement } = require("react");
+
 function getComputerChoice() {
     const comp=(Math.floor(Math.random()*10)+1);
     let compick=0;
@@ -27,6 +29,8 @@ function getHumanChoice(e) {
         
 
     const computerPick = getComputerChoice();
+    showCompPicked(computerPick)
+    showPlayerPicked(userpick)
     playRound(userpick, computerPick);
 }
 
@@ -55,13 +59,51 @@ function playRound(humanChoice, computerChoice){
 
 }
 
+function showCompPicked(show){
+    const map = ["", "rock", "paper", "scissors"];
+    const picked=map[show]
+    const spans = document.querySelectorAll('.computer-side span');
+    
+    // Hide all
+    spans.forEach(span => span.classList.remove('active'));
+    
+    // Show selected
+    const selected = document.querySelector(`#comp-${picked}`);
+    console.log(selected)
+    console.log(picked)
+    if (selected) {
+      selected.classList.add('active');
+    }
+  
+}
+
+function showPlayerPicked(show){
+    const map = ["", "rock", "paper", "scissors"];
+    const picked=map[show]
+    const spans = document.querySelectorAll('.player-side span');
+    
+    // Hide all
+    spans.forEach(span => span.classList.remove('active'));
+    
+    // Show selected
+    const selected = document.querySelector(`#user-${picked}`);
+    console.log(selected)
+    console.log(picked)
+    if (selected) {
+      selected.classList.add('active');
+    }
+  
+}
+
 function endGame(){
+
     if(humanScore>computerScore){
         console.log(`Human wins with the score of ${humanScore}`);
     }else if(humanScore<computerScore) {
         console.log(`Computer wins with the score of ${computerScore}`);
         
     }else console.log(`Its a tie!! With both score of ${computerScore}!!`);
+    // restart()
     
 }
 
@@ -69,7 +111,9 @@ function restart(){
     humanScore = 0;
     computerScore = 0;
     roundsPlayed = 0;
-
+    const spans = document.querySelectorAll('.computer-side span');
+    spans.forEach(span => span.classList.remove('active'));
+    spans.item(0).classList.add('active');
 }
 
 function globalEventListener(type,selector,callback){
