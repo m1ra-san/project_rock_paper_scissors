@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+    </style>
 </head>
 
 <body>
@@ -12,121 +14,212 @@
         <h1>ROCK PAPER SCISSORS</h1>
         <h2>Fight!</h2>
         <div class="battle-grounds">
-            <div >
-                <div class="computer-side"><span id="comp-idle" class="active">Computer</span><span id="comp-rock">Rock</span>
-                    <span id="comp-paper" >Paper</span><span id="comp-scissors" >Scissors</span></div>
-                <div class="player-side"><span id="user-idle" class="active">User</span><span id="user-rock" >Rock</span>
-                    <span id="user-paper" >Paper</span><span id="user-scissors">Scissors</span>
+            <div>
+                <div class="computer-side">
+                    <span>Computer</span><img src="images/coin-heads.svg" id="comp-idle" class="active"><img
+                        src="images/rock.svg" id="comp-rock">
+                    <img src="images/paper.svg" id="comp-paper"><img src="images/scissors.svg" id="comp-scissors">
+                </div>
+                <div class="vs" style="flex:0.5;min-width:40px;">
+                    <img src="images/vs.svg" alt="">
+                </div>
+                <div class="player-side">
+                    <span>You</span><img src="images/coin-heads.svg" id="user-idle" class="active"><img
+                        src="images/rock.svg" id="user-rock">
+                    <img src="images/paper.svg" id="user-paper"><img src="images/scissors.svg" id="user-scissors">
                 </div>
             </div>
-            
+
         </div>
         <div class="container">
+            <div>
+                <p class="dialogue" style="text-align: center;">Its a tie!</p>
+            </div>
             <div class="game-buttons">
                 <button value="Rock">Rock</button>
                 <button value="Paper">Paper</button>
                 <button value="Scissors">Scissors</button>
             </div>
+        </div>
+        <div class="restart-container">
             <div class="restart-panel">
-                <button class="btnrestart">Restart</button>
+                <p style="text-align: center">Its a tie!</p>
+                <div>1</div>
+                <button id="btnrestart">Restart</button>
             </div>
         </div>
-            
+
     </div>
 </body>
 <style>
     * {
         margin: 0;
         padding: 0;
-        outline: 2px solid red;
+        /* outline: 2px solid red; */
     }
 
+    @font-face {
+        font-family: 'Super-Frosting';
+        src: url('super-Frosting.ttf') format('truetype');
+    }
+
+    @keyframes popIn {
+        0% {
+            transform: scale(0.3);
+            opacity: 0;
+        }
+
+        60% {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+
+    html,
     body {
+        height: 100%;
         display: flex;
         justify-content: center;
-        align-items: center;
         flex-direction: column;
+        align-items: center;
         box-sizing: border-box;
+        background-color: #2D4F56;
     }
 
-    h1{
-        margin-bottom: 70px;
+    h1 {
+        font-family: 'Super-Frosting', sans-serif;
+        font-size: clamp(50px, 10vw, 100px);
         box-sizing: border-box;
         text-align: center;
+        letter-spacing: 1.2px;
+        color: #F74C26;
+        text-shadow: #ffffff 2px -2px 3px, 4px -4px 0 #541C00, -4px 4px 0 #541C00,
+            -4px -4px 0 #541C00, 4px 0px 0 #541C00, 0px 4px 0 #541C00,
+            -4px 0px 0 #541C00, 0px -4px 0 #541C00;
+        ;
+    }
+
+
+    h2,
+    p {
+        font-family: "Pixelify Sans", sans-serif;
+        color: #29273E;
+        font-size: 40px;
+    }
+
+    span {
+        font-family: "Pixelify Sans", sans-serif;
+        color: #151417;
+    }
+
+
+    button {
+        border-radius: 63px;
+        box-shadow: 0px 4px 0px -1px #541C00, 0px 5px 2px 0px #00000036;
+        background-color: #F9D64B;
+        font-family: "Pixelify Sans", sans-serif;
+        font-weight: 900;
+        font-size: medium;
+        color: #29273E;
     }
 
     .main-container {
         width: 94vw;
-        height: 100vh;
+        height: 94vh;
         display: flex;
+        gap: 30px;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        gap: 60px;
         box-sizing: border-box;
+        background-color: #EEEEE970;
     }
 
-    .battle-grounds{
+    .battle-grounds {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         min-width: 50%;
         max-width: 60%;
-        height:20%;
+        height: 40%;
     }
 
 
-    .battle-grounds div{
+    .battle-grounds div {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content:center;
+        justify-content: center;
         box-sizing: border-box;
-        gap: 20%;
     }
 
-    .computer-side span{
-      display: none;
+    .computer-side,
+    .player-side {
+        max-height: 100%;
+        flex-direction: column;
+        flex: 2;
     }
 
-    .computer-side span.active {
-      display: inline;
-      
+
+    .computer-side img {
+        display: none;
+        width: auto;
+        min-height: 60%;
     }
 
-    .player-side span{
-      display: none;
+    .computer-side img.active {
+        display: inline;
+        width: auto;
+        min-height: 60%;
+        /* animation */
+        animation: popIn 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
     }
 
-    .player-side span.active {
-      display: inline;
-      
+    .player-side img {
+        display: none;
+        width: auto;
+        min-height: 60%;
     }
 
-    
+    .player-side img.active {
+        display: inline;
+        width: auto;
+        min-height: 60%;
+        /* animation */
+        animation: popIn 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+    }
 
 
+    .dialogue {
+        visibility: hidden;
+        font-size: 20px;
+        min-width: 80vw;
+        margin: 10px;
+    }
 
-
-
-
-
-    .container{
+    .container {
         width: 40%;
         display: flex;
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
         flex-direction: column;
-        margin-bottom: 150px;
     }
 
 
     .game-buttons {
         width: 100%;
-        background-color: beige;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -136,25 +229,68 @@
     .game-buttons button {
         min-width: 80px;
         width: 100px;
-        padding:10px 5px;
-        border-radius: 3px;
+        padding: 10px 5px;
+    }
+
+
+    /* i forgot to use borderbox and add border instead of this*/
+    .restart-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #2D4F56;
+        z-index: 10;
+
+        /* initially hidden */
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
 
     .restart-panel {
         display: flex;
+        width: 94vw;
+        height: 94vh;
         align-items: center;
         justify-content: center;
-        /* hide */
-        visibility: hidden;
-        max-height: 0;
+        flex-direction: column;
+        background-color: #EEEEE999;
+    }
+
+    .restart-panel * {
+        margin: 20px;
+    }
+
+    .restart-container.visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .restart-panel div {
+        padding: 0 10px;
+        height: auto;
+        background-color: beige;
+        font-size: 50px;
+        border: 5px inset #ff6b4a;
+        color: #29273E;
+    }
+
+    .restart-panel p {
+        font-size: 40px;
     }
 
     .restart-panel button {
-        margin: 20px;
         width: 150px;
         padding: 10px;
-        border-radius: 3px;
     }
 </style>
+
+<script src="script.js"></script>
 
 </html>
