@@ -1,9 +1,15 @@
-# project_rock_paper_scissors
+# Project: Rock-Paper-Scissors
 
+## What I Learned & Used
+- Functions  
+- Arrays  
+- DOM Manipulation  
+- Event Handling  
 
-Learned and USE
--Functions 
--Arrays
--DOM Manipulation and Events
+## Project Description
+This game is a **front-end only** project.  
+Currently, it has a basic game interface.  
 
-This game only utilize front end. Two game modes- pvp and multiplayer and finally game scores or high score between players will be added in the future.
+In the future, it will include:  
+- Two game modes (PvP and Multiplayer)  
+- Game scores and high scores between players
